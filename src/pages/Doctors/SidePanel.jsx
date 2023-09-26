@@ -1,18 +1,29 @@
 /* eslint-disable react/prop-types */
 
+import { toast } from "react-toastify";
 import convertTime from "../../utils/convertTime";
 import { BASE_URL, token } from "./../../config";
+import { useState } from "react";
 
 
-const SidePanel = ({ ticketPrice, timeSlots, doctorId }) => {
+const SidePanel = ({ ticketPrice, timeSlots, doctorId, bookedTime }) => {
+  const [doctorBookedAppointment, setDoctorBookedAppointment] = useState([])
   const bookingHandler = async () => {
+    if(bookedTime === undefined || Object.keys(bookedTime).length === 0){
+      toast.error('Select Time Slot')
+      return
+    }
+
     try {
       const response = await fetch(
         `${BASE_URL}/bookings/checkout-session/${doctorId}`,
         {
-          method: "post",
+          method: "POST",
+          body:JSON.stringify(bookedTime),
           headers: {
             Authorization: `Bearer ${token} `,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
           },
         }
       );
@@ -26,8 +37,6 @@ const SidePanel = ({ ticketPrice, timeSlots, doctorId }) => {
       console.log(error);
     }
   };
-
-  
 
 
   return (
