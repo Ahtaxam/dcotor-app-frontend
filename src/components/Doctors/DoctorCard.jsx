@@ -4,7 +4,8 @@ import starIcon from "../../assets/images/Star.png";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 
-const DoctorCard = ({ doctor }) => {
+const DoctorCard = ({ doctor, booked }) => {
+  console.log(doctor);
   const {
     name,
     averageRating,
@@ -45,16 +46,22 @@ const DoctorCard = ({ doctor }) => {
             +{totalPatients} Patients
           </h3> */}
           <p className="text-[14px] leading-[24px] font-[400] text-textColor">
-            At {experiences[0].hospital}
+            At {experiences[0]?.hospital}
           </p>
         </div>
 
-        <Link
+        {booked ? 
+          <div className="text-blue-600 text-sm">
+            <p>{doctor.bookingTime.day}</p>
+            <p>{doctor.bookingTime.time}</p>
+            </div>
+         :<Link
           to={`/doctors/${doctor._id}`}
           className=" w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] flex  items-center justify-center  group hover:bg-[#0067FF] hover:border-none"
         >
           <BsArrowRight className="group-hover:text-white w-6 h-5" />
-        </Link>
+        </Link>}
+
       </div>
     </div>
   );
