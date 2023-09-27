@@ -5,31 +5,46 @@ import convertTime from "../../utils/convertTime";
 import { BASE_URL, token } from "./../../config";
 import { useState } from "react";
 
-
 const SidePanel = ({ ticketPrice, timeSlots, doctorId, bookedTime }) => {
-  const [doctorBookedAppointment, setDoctorBookedAppointment] = useState([])
   const bookingHandler = async () => {
-    if(bookedTime === undefined || Object.keys(bookedTime).length === 0){
-      toast.error('Select Time Slot')
-      return
+    if (bookedTime === undefined || Object.keys(bookedTime).length === 0) {
+      toast.error("Select Time Slot");
+      return;
     }
-
     try {
-      const response = await fetch(
+      const doctorPromise = fetch(`${BASE_URL}/doctorappointments`, {
+        method: "POST",
+        body: JSON.stringify({
+          doctorId: doctorId,
+          selectedSlots: bookedTime,
+        }),
+        headers: {
+          Authorization: `Bearer ${token} `,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      const stripePromise = fetch(
         `${BASE_URL}/bookings/checkout-session/${doctorId}`,
         {
           method: "POST",
-          body:JSON.stringify(bookedTime),
+          body: JSON.stringify(bookedTime),
           headers: {
             Authorization: `Bearer ${token} `,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            Accept: "application/json",
+            "Content-Type": "application/json",
           },
         }
       );
 
-      const data = await response.json();
+      const [doctorresponsee, striperesponse] = await Promise.all([
+        doctorPromise,
+        stripePromise,
+      ]);
 
+      const doctorData = await doctorresponsee.json();
+      const data = await striperesponse.json();
       if (data.session.url) {
         window.location.href = data.session.url;
       }
@@ -37,7 +52,6 @@ const SidePanel = ({ ticketPrice, timeSlots, doctorId, bookedTime }) => {
       console.log(error);
     }
   };
-
 
   return (
     <div className=" shadow-panelShadow p-3 lg:p-5 rounded-md">
