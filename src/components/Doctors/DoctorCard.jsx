@@ -4,8 +4,7 @@ import starIcon from "../../assets/images/Star.png";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 
-const DoctorCard = ({ doctor, booked }) => {
-  console.log(doctor);
+const DoctorCard = ({ doctor, booked, bookingTime}) => {
   const {
     name,
     averageRating,
@@ -15,6 +14,7 @@ const DoctorCard = ({ doctor, booked }) => {
     photo,
     experiences,
   } = doctor;
+
 
   return (
     <div className="p-3 lg:p-5 ">
@@ -52,8 +52,8 @@ const DoctorCard = ({ doctor, booked }) => {
 
         {booked ? 
           <div className="text-blue-600 text-sm">
-            <p>{doctor.bookingTime.day}</p>
-            <p>{doctor.bookingTime.time}</p>
+            <p>{bookingTime.day}</p>
+            <p>{bookingTime.time}</p>
             </div>
          :<Link
           to={`/doctors/${doctor._id}`}
