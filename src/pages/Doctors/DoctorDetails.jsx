@@ -15,20 +15,18 @@ const DoctorDetails = () => {
   const [slots, setSlot] = useState();
   const [bookedTime, setBookedTime] = useState();
   const [selected, setSelected] = useState({});
-  const [doctorSelected, setDoctorSelected] = useState([{
-    day:0,
-    slots:["4:00 P.M"]
-  }]);
+  const { id } = useParams();
 
-  
+  const {
+    data: appointmentSlots,
+    loading: loadingData,
+    error: loadingError,
+  } = useFetchData(`${BASE_URL}/doctorappointments/${id}`);
 
   const selectedTimeSlots = {};
-  doctorSelected.forEach((entry) => {
-  selectedTimeSlots[entry.day] = entry.slots;
-});
-
-
-  const { id } = useParams();
+  appointmentSlots?.selectedSlots?.forEach((entry) => {
+    selectedTimeSlots[entry.day] = entry.slots;
+  });
 
   const {
     data: doctor,
@@ -89,9 +87,6 @@ const DoctorDetails = () => {
       // If the same time slot is clicked again, deselect it
       delete newSelectedIndexes[groupIndex];
       setBookedTime({});
-      setDoctorSelected((prev) => {
-        return [];
-      });
     } else {
       // Deselect all other days and select the clicked time slot for this day
       Object.keys(newSelectedIndexes).forEach((key) => {
@@ -106,13 +101,7 @@ const DoctorDetails = () => {
 
     // Update the state with the new selectedIndexes
     setSelected(newSelectedIndexes);
-
-    setDoctorSelected((prev) => {
-      return [formatTime(pickedTime)];
-    });
   };
-
-  console.log("doctorSelected: ", selectedTimeSlots);
 
   useEffect(() => {
     let res = timeSlots?.map((obj) =>
@@ -224,7 +213,6 @@ const DoctorDetails = () => {
               return (
                 <div key={index}>
                   <p> {timeSlots[index].day} </p> <br></br>
-                  {console.log( timeSlots[index].length)}
                   <div className="flex gap-4 flex-wrap ">
                     {obj.map((data, i) => (
                       <button
@@ -235,15 +223,19 @@ const DoctorDetails = () => {
                             index,
                             i,
                             timeSlots[index].day
+
                           )
                         }
-                       
                         className={
                           selected[index] === i
                             ? "w-[100px] h-auto rounded bg-sky-600 border-solid border-2 border-black-500 p-3 cursor-pointer text-center text-white"
-                            : selectedTimeSlots[index]?.includes(formatTime(data)) ? "bg-yellow-600"
+                            : selectedTimeSlots[timeSlots[index].day]?.includes(
+                                formatTime(data)
+                              )
+                            ? "bg-gray-300 text-gray-500 cursor-not-allowed py-2 px-4 rounded-md"
                             : "w-[100px] h-auto rounded bg-white border-solid border-2 border-sky-500 p-3 cursor-pointer text-center"
                         }
+                        disabled={selectedTimeSlots[timeSlots[index].day]?.includes(formatTime(data))}
                       >
                         {" "}
                         {formatTime(data)}{" "}
