@@ -30,7 +30,6 @@ const MyAccount = () => {
   };
 
   const handleDelete =  async (id) => {
-    console.log("ID: ", id);
     const response = await fetch(`${BASE_URL}/users/${id}`,{
       method:"DELETE",
       headers: { Authorization: `Bearer ${token}` }
