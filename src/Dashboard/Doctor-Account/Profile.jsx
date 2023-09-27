@@ -55,7 +55,6 @@ const Profile = ({ doctorData }) => {
 
   const updateDoctorHandler = async e => {
     e.preventDefault();
-    console.log(formData);
     try {
       const res = await fetch(`${BASE_URL}/doctors/${doctorData._id}`, {
         method: "put",
