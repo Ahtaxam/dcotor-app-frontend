@@ -30,10 +30,10 @@ const Home = () => {
                   We help patients live a healthy, longer life.
                 </h1>
                 <p className="text__para">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Natus quaerat cumque fugit, perspiciatis cum nemo aperiam, aut
-                  quia earum amet architecto, modi odio. Soluta unde ducimus
-                  perferendis?
+                  Our Doctor Appointment App is designed with one goal in mind:
+                  to empower patients to take control of their health journey.
+                  By streamlining the appointment booking process, we ensure
+                  that patients can access timely medical care and guidance.
                 </p>
                 <button className="btn">Request an Appointment </button>
               </div>
@@ -106,8 +106,9 @@ const Home = () => {
                   Find a Doctor
                 </h2>
                 <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                  World-class care for everyone. Our health System offers
-                  unmatched, expert health care. From the lab to the clinic.
+                  Discover a wide network of experienced healthcare
+                  professionals, ensuring you can find the perfect doctor to
+                  address your specific needs.
                 </p>
 
                 <Link
@@ -129,8 +130,8 @@ const Home = () => {
                   Find a Location
                 </h2>
                 <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                  World-class care for everyone. Our health System offers
-                  unmatched, expert health care. From the lab to the clinic.
+                  Locate healthcare facilities near you with ease, making it
+                  convenient to access medical services wherever you are.
                 </p>
 
                 <Link
@@ -151,8 +152,8 @@ const Home = () => {
                   Book Appointment
                 </h2>
                 <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                  World-class care for everyone. Our health System offers
-                  unmatched, expert health care. From the lab to the clinic.
+                  Effortlessly schedule appointments at your preferred time, so
+                  you can prioritize your health without the hassle.
                 </p>
 
                 <Link

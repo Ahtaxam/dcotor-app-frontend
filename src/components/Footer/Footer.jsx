@@ -9,19 +9,15 @@ import {
 
 const socialLinks = [
   {
-    path: "https://www.youtube.com/c/CodingWithMuhib",
-    icon: <AiFillYoutube className="group-hover:text-white w-4 h-5" />,
-  },
-  {
-    path: "https://github.com/codingwithmuhib",
+    path: "https://github.com/Ahtaxam",
     icon: <AiFillGithub className="group-hover:text-white w-4 h-5" />,
   },
   {
-    path: "https://www.instagram.com/muhib160.official/",
+    path: "https://www.instagram.com/ahtaxamali/",
     icon: <AiOutlineInstagram className="group-hover:text-white w-4 h-5" />,
   },
   {
-    path: "https://www.linkedin.com/in/codingwithmuhib/",
+    path: "https://www.linkedin.com/in/ahtashamali/",
     icon: <RiLinkedinFill className="group-hover:text-white w-4 h-5" />,
   },
 ];
@@ -47,19 +43,19 @@ const quickLinks01 = [
 
 const quickLinks02 = [
   {
-    path: "/find-a-doctor",
+    path: "/doctors",
     display: "Find a Doctor",
   },
   {
-    path: "/",
+    path: "/doctors",
     display: "Request an Appointment",
   },
   {
-    path: "/",
+    path: "/doctors",
     display: "Find a Location",
   },
   {
-    path: "/",
+    path: "/contact",
     display: "Get a Opinion",
   },
 ];
@@ -85,7 +81,7 @@ const Footer = () => {
           <div>
             <img src={logo} alt="" />
             <p className="text-[16px] leading-7 font-[400] text-textColor mt-4">
-              Copyright © {year} developed by Muhibur Rahman all rights
+              Copyright © {year} developed by Developer's all rights
               reserved.
             </p>
 

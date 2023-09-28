@@ -21,14 +21,15 @@ const About = () => {
             <p className="text__para">
               For 30 years in a row, U.S. News & World Report has recognized us
               as one of the best publics hospitals in the Nation and #1 in
-              Texas. Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Quas, nemo?
+              Pakistan. We are excited about the positive impact our app will have 
+              on the healthcare ecosystem, 
             </p>
             <p className="text__para mt-[30px]">
               Our best is something we strive for each day, caring for our
               patients—not looking back at what we accomplished but towards what
-              we can do tomorrow. Providing the best. Lorem ipsum dolor sit
-              amet, consectetur adipisicing elit. Aliquid, modi?
+              we can do tomorrow. Providing the best.Stay tuned as we continue 
+              to work diligently to bring this innovative solution to life, and 
+              thank you for being a part of our journey towards excellence in healthcare technology
             </p>
             <Link to="/">
               <button className="btn">Learn More</button>

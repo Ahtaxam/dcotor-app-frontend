@@ -1,27 +1,28 @@
 export const faqs = [
   {
-    question: "What is your medical care?",
+    question: "How can I book an appointment with a doctor?",
     content:
-      "One Medical was founded on a better model of care one designed around patients needs that provides a higher level of quality and service affordably. We do this through innovative design, excellent customer service, and the efficient use of technology.",
+      "Booking an appointment is easy with our app. Simply log in, search for the doctor you want to see, choose an available time slot, and confirm your appointment. You can also view your upcoming appointments in the app.",
   },
   {
-    question: "What happens if I need to go a hospital?",
+    question: "Is my personal information secure?",
     content:
-      "One Medical was founded on a better model of care one designed around patients needs that provides a higher level of quality and service affordably. We do this through innovative design, excellent customer service, and the efficient use of technology.",
+      "Yes, we take data security seriously. Your personal information is encrypted and stored securely. We adhere to strict privacy policies to ensure the confidentiality of your data.",
   },
   {
-    question: "What happens if I need to go a hospital?",
+    question: "Can I reschedule or cancel an appointment?",
     content:
-      "One Medical was founded on a better model of care one designed around patients needs that provides a higher level of quality and service affordably. We do this through innovative design, excellent customer service, and the efficient use of technology.",
+      "No there's Strict rule! You can't reschedule or cancel your appointment through the app.",
   },
   {
-    question: "Can I visit your medical office?",
+    question: "What should I do if I need urgent medical care?",
     content:
-      "One Medical was founded on a better model of care one designed around patients needs that provides a higher level of quality and service affordably. We do this through innovative design, excellent customer service, and the efficient use of technology.",
+      "In case of an emergency or urgent medical need, please call 911 or visit the nearest hospital. Our app is designed for non-emergency appointments and routine healthcare services.",
   },
   {
-    question: "Does you provide urgent care?",
+    question: "Do you offer telemedicine appointments?",
     content:
-      "One Medical was founded on a better model of care one designed around patients needs that provides a higher level of quality and service affordably. We do this through innovative design, excellent customer service, and the efficient use of technology.",
+      "Yes, we provide telemedicine appointments for your convenience. You can consult with a doctor online from the comfort of your home. Just select the telemedicine option where you booked you appointment.",
   },
 ];
+
