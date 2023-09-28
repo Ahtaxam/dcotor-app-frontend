@@ -3,7 +3,6 @@
 import { toast } from "react-toastify";
 import convertTime from "../../utils/convertTime";
 import { BASE_URL, token } from "./../../config";
-import { useState } from "react";
 
 const SidePanel = ({ ticketPrice, timeSlots, doctorId, bookedTime }) => {
   const bookingHandler = async () => {
@@ -38,12 +37,24 @@ const SidePanel = ({ ticketPrice, timeSlots, doctorId, bookedTime }) => {
         }
       );
 
-      const [doctorresponsee, striperesponse] = await Promise.all([
-        doctorPromise,
-        stripePromise,
-      ]);
+      const emailPromise = fetch(`${BASE_URL}/sendemail`, {
+        method: "POST",
+        body: JSON.stringify({
+          doctorId,
+          bookedTime,
+        }),
+        headers: {
+          Authorization: `Bearer ${token} `,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      const [doctorresponsee, striperesponse, emailresponse] =
+        await Promise.all([doctorPromise, stripePromise, emailPromise]);
 
       const doctorData = await doctorresponsee.json();
+      const email = await emailresponse.json();
       const data = await striperesponse.json();
       if (data.session.url) {
         window.location.href = data.session.url;
