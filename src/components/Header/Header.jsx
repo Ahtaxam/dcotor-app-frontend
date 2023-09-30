@@ -23,6 +23,10 @@ const navLinks = [
     path: "/contact",
     display: "Contact",
   },
+  {
+    path: "/blogs",
+    display: "Health Blogs",
+  },
 ];
 
 const Header = () => {
