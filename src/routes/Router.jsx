@@ -11,6 +11,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import DoctorDetails from "../pages/Doctors/DoctorDetails";
 import Contact from "../pages/Contact";
 import CheckoutSuccess from "../pages/CheckoutSuccess";
+import Blogs from "../pages/Blogs";
+import Blog from "../pages/writeBlog"
 
 const Router = () => {
   return (
@@ -37,10 +39,20 @@ const Router = () => {
         }
       />
 
+      <Route
+        path="/doctor/blog"
+        element={
+          <ProtectedRoute allowedRoles={["doctor"]}>
+            <Blog />
+          </ProtectedRoute>
+        }
+      />
+
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<SignUp />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/checkout-success" element={<CheckoutSuccess />} />
+      <Route path="/blogs" element={<Blogs />} />
     </Routes>
   );
 };
