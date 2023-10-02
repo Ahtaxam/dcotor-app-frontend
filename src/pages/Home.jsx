@@ -16,8 +16,11 @@ import avatarIcon from "../assets/images/avatar-icon.png";
 import DoctorsList from "../components/Doctors/DoctorsList";
 import Testimonial from "../components/Testimonial/Testimonial";
 import FaqList from "../components/Faq/FaqList";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Home = () => {
+  const {role} = useContext(AuthContext);
   return (
     <>
       <section className="hero__section pt-[60px] 2xl:h-[800px]">
@@ -244,7 +247,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section>
+     { role !== "doctor" && <section>
         <div className="container">
           <div className="xl:w-[470px] mx-auto">
             <h2 className="heading text-center">Our great doctors</h2>
@@ -254,10 +257,10 @@ const Home = () => {
             </p>
           </div>
 
-          <DoctorsList />
+          <DoctorsList /> 
         </div>
       </section>
-
+}
       <section>
         <div className="container">
           <div className="flex justify-between gap-[50px] lg:gap-0">

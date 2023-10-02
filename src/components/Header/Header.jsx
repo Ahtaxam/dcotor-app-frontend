@@ -2,7 +2,7 @@ import logo from "../../assets/images/logo.png";
 import { NavLink, Link } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
 import { useContext, useEffect, useRef } from "react";
-import UserAvatar from "../../assets/images/user-avatar.png"
+import UserAvatar from "../../assets/images/user-avatar.png";
 
 import { AuthContext } from "./../../context/AuthContext";
 
@@ -72,13 +72,15 @@ const Header = () => {
                 <li key={index}>
                   <NavLink
                     to={link.path}
-                    className={navClass =>
+                    className={(navClass) =>
                       navClass.isActive
                         ? "text-[#0067FF] font-[600] text-[16px] leading-7"
                         : "text-textColor font-[500] text-[16px] leading-7"
                     }
                   >
-                    {link.display}
+                    {role === "doctor" && link.display === "Find a Doctor"
+                      ? ""
+                      : link.display}
                   </NavLink>
                 </li>
               ))}
