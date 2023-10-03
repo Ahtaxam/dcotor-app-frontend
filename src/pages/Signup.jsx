@@ -5,6 +5,8 @@ import { BASE_URL } from "../config";
 import { toast } from "react-toastify";
 import uploadImageToCloudinary from "../utils/uploadCloudinary";
 import HashLoader from "react-spinners/HashLoader";
+import { MdVisibilityOff, MdVisibility } from "react-icons/md";
+import { ValidateEmail } from "../utils/validateEmail";
 
 const SignUp = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -18,14 +20,15 @@ const SignUp = () => {
     photo: selectedFile,
   });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFileInputChange = async event => {
+  const handleFileInputChange = async (event) => {
     const file = event.target.files[0];
 
     const data = await uploadImageToCloudinary(file);
@@ -35,8 +38,32 @@ const SignUp = () => {
     setFormData({ ...formData, photo: data.url });
   };
 
-  const handleSubmit = async e => {
+  
+
+  const validatePassword = (password) => {
+    if (password.length < 8 || password.length > 12) {
+      toast.error("Password length should between 8 to 12 character !");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (ValidateEmail(formData.email) === false) {
+      toast.error("Please Entered Valid email address!");
+      return;
+    }
+
+    if (validatePassword(formData.password) === false) {
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch(`${BASE_URL}/auth/register`, {
@@ -87,6 +114,7 @@ const SignUp = () => {
                   placeholder="Full Name"
                   className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-[#0067FF] text-[16px] leading-7 text-headingColor placeholder:text-textColor"
                   required
+                  autoFocus
                 />
               </div>
               <div className="mb-5">
@@ -103,14 +131,21 @@ const SignUp = () => {
 
               <div className="mb-5">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={formData.password}
                   onChange={handleInputChange}
                   name="password"
                   placeholder="Password"
-                  className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-[#0067FF] text-[16px] leading-7 text-headingColor placeholder:text-textColor"
+                  className=" w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-[#0067FF] text-[16px] leading-7 text-headingColor placeholder:text-textColor"
                   required
                 />
+                <span className="absolute mt-5 -ml-6">
+                  {showPassword ? (
+                    <MdVisibilityOff onClick={handleShowPassword} />
+                  ) : (
+                    <MdVisibility onClick={handleShowPassword} />
+                  )}
+                </span>
               </div>
 
               <div className="mb-5 flex items-center justify-between">

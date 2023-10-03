@@ -4,6 +4,8 @@ import { BASE_URL } from "../config";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
+import { MdVisibilityOff, MdVisibility } from "react-icons/md";
+import { ValidateEmail } from "../utils/validateEmail";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,17 +13,26 @@ const Login = () => {
     password: "",
   });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const { dispatch } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
-  const handleInputChange = e => {
+  const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async e => {
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (ValidateEmail(formData.email) === false) {
+      toast.error("Please Entered Valid email address!");
+      return;
+    }
 
     setLoading(true);
 
@@ -79,7 +90,7 @@ const Login = () => {
 
             <div className="mb-5">
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={formData.password}
                 onChange={handleInputChange}
                 name="password"
@@ -87,6 +98,13 @@ const Login = () => {
                 className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-[#0067FF] text-[16px] leading-7 text-headingColor placeholder:text-textColor"
                 required
               />
+              <span className="absolute mt-5 -ml-6">
+                {showPassword ? (
+                  <MdVisibilityOff onClick={handleShowPassword} />
+                ) : (
+                  <MdVisibility onClick={handleShowPassword} />
+                )}
+              </span>
             </div>
 
             <div className="mt-7">
@@ -103,6 +121,13 @@ const Login = () => {
               Don&apos;t have an account?
               <Link to="/register" className="text-[#0067FF] font-medium ml-1">
                 Register
+              </Link>
+            </p>
+
+            <p className="mt-5 text-textColor text-center">
+              
+              <Link to="/forgotpassword" className="text-[#0067FF] font-medium ml-1">
+              Forgot Password
               </Link>
             </p>
           </form>
