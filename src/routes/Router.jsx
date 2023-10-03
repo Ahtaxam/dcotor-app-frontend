@@ -14,6 +14,7 @@ import CheckoutSuccess from "../pages/CheckoutSuccess";
 import Blogs from "../pages/Blogs";
 import Blog from "../pages/writeBlog"
 import ShowBlog from "../pages/Blog"
+import ForgotPassword from "../pages/ForgotPassword";
 
 const Router = () => {
   return (
@@ -55,6 +56,8 @@ const Router = () => {
       <Route path="/checkout-success" element={<CheckoutSuccess />} />
       <Route path="/blogs" element={<Blogs />} />
       <Route path="/:id" element={<ShowBlog/>} />
+
+      <Route path="forgotpassword" element={<ForgotPassword/>} />
     </Routes>
   );
 };
