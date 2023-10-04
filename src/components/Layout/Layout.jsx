@@ -10,7 +10,7 @@ const Layout = () => {
       <main>
         <Router />
       </main>
-      <Footer />
+      <Footer/>
     </>
   );
 };

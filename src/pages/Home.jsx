@@ -86,7 +86,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section>
+      {role !== "doctor" && <section>
         <div className="container ">
           <div className="lg:w-[470px] mx-auto">
             <h2 className="heading text-center">
@@ -169,11 +169,11 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section>}
 
       <About />
 
-      <section>
+      {role !== "doctor" &&<section>
         <div className="container">
           <div className="xl:w-[470px] mx-auto">
             <h2 className="heading text-center">Our medical services</h2>
@@ -185,7 +185,7 @@ const Home = () => {
 
           <ServicesList />
         </div>
-      </section>
+      </section>}
 
       <section>
         <div className="container">

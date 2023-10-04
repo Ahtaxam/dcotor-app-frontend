@@ -18,7 +18,7 @@ const SidePanel = ({ ticketPrice, timeSlots, doctorId, bookedTime }) => {
           selectedSlots: bookedTime,
         }),
         headers: {
-          Authorization: `Bearer ${token} `,
+          Authorization: `Bearer ${token()} `,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
@@ -30,7 +30,7 @@ const SidePanel = ({ ticketPrice, timeSlots, doctorId, bookedTime }) => {
           method: "POST",
           body: JSON.stringify(bookedTime),
           headers: {
-            Authorization: `Bearer ${token} `,
+            Authorization: `Bearer ${token()} `,
             Accept: "application/json",
             "Content-Type": "application/json",
           },
@@ -44,14 +44,14 @@ const SidePanel = ({ ticketPrice, timeSlots, doctorId, bookedTime }) => {
           bookedTime,
         }),
         headers: {
-          Authorization: `Bearer ${token} `,
+          Authorization: `Bearer ${token()} `,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
       });
 
       const [doctorresponsee, striperesponse, emailresponse] =
-        await Promise.all([doctorPromise, stripePromise, emailPromise]);
+        await Promise.all([doctorPromise,stripePromise,emailPromise]);
 
       const doctorData = await doctorresponsee.json();
       const email = await emailresponse.json();

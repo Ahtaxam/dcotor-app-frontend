@@ -6,6 +6,8 @@ import {
   AiFillGithub,
   AiOutlineInstagram,
 } from "react-icons/ai";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const socialLinks = [
   {
@@ -36,7 +38,7 @@ const quickLinks01 = [
     display: "Services",
   },
   {
-    path: "/",
+    path: "/blogs",
     display: "Blog",
   },
 ];
@@ -73,6 +75,8 @@ const quickLinks03 = [
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const {role} = useContext(AuthContext)
+
 
   return (
     <footer className="pt-16 pb-10">
@@ -104,24 +108,26 @@ const Footer = () => {
             </h2>
             <ul>
               {quickLinks01.map((item, index) => (
-                <li key={index} className="mb-4">
+                <>
+               {role === "doctor" && item.display === "Services" ? "": <li key={index} className="mb-4">
                   <Link
                     className="text-[16px] leading-7 font-[400] text-textColor"
                     to={item.path}
                   >
                     {item.display}
                   </Link>
-                </li>
+                </li>}
+                </>
               ))}
             </ul>
           </div>
 
-          <div>
+          {role !== "doctor" && <div>
             <h2 className="text-[20px] leading-[30px] font-[700] text-headingColor mb-6">
               I want to:
             </h2>
             <ul>
-              {quickLinks02.map((item, index) => (
+              {  quickLinks02.map((item, index) => (
                 <li key={index} className="mb-4">
                   <Link
                     className="text-[16px] leading-7 font-[400] text-textColor"
@@ -132,7 +138,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div>}
 
           <div>
             <h2 className="text-[20px] leading-[30px] font-[700] text-headingColor mb-6">

@@ -26,8 +26,10 @@ const navLinks = [
   {
     path: "/blogs",
     display: "Health Blogs",
-  },
+  }
 ];
+
+const Restricted = ["Find a Doctor","Services"]
 
 const Header = () => {
   const { user, token, role } = useContext(AuthContext);
@@ -69,21 +71,36 @@ const Header = () => {
           <div className="navigation" ref={menuRef} onClick={toggleMenu}>
             <ul className="menu flex items-center gap-[2.7rem]">
               {navLinks.map((link, index) => (
-                <li key={index}>
-                  <NavLink
-                    to={link.path}
-                    className={(navClass) =>
-                      navClass.isActive
-                        ? "text-[#0067FF] font-[600] text-[16px] leading-7"
-                        : "text-textColor font-[500] text-[16px] leading-7"
-                    }
-                  >
-                    {role === "doctor" && link.display === "Find a Doctor"
-                      ? ""
-                      : link.display}
-                  </NavLink>
-                </li>
+                <>
+                  {role === "doctor" && Restricted.includes(link.display) ? (
+                    ""
+                  ) : (
+                    <li key={index}>
+                      <NavLink
+                        to={link.path}
+                        className={(navClass) =>
+                          navClass.isActive
+                            ? "text-[#0067FF] font-[600] text-[16px] leading-7"
+                            : "text-textColor font-[500] text-[16px] leading-7"
+                        }
+                      >
+                        {link.display}
+                      </NavLink>
+                    </li>
+                  )}
+                </>
+                
               ))}
+              {role === "doctor" ? <NavLink
+                        to="/otherdoctors"
+                        className={(navClass) =>
+                          navClass.isActive
+                            ? "text-[#0067FF] font-[600] text-[16px] leading-7"
+                            : "text-textColor font-[500] text-[16px] leading-7"
+                        }
+                      >
+                        Doctors
+                      </NavLink>:""}
             </ul>
           </div>
 

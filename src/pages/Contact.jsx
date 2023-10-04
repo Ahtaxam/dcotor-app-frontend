@@ -36,7 +36,7 @@ const Contact = () => {
           ...userData,
         }),
         headers: {
-          Authorization: `Bearer ${token} `,
+          Authorization: `Bearer ${token()} `,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
