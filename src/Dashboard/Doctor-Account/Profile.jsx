@@ -5,8 +5,29 @@ import uploadImageToCloudinary from "../../utils/uploadCloudinary";
 import { AiOutlineDelete } from "react-icons/ai";
 
 import { toast } from "react-toastify";
+import { addDays, format } from 'date-fns';
+
 
 const Profile = ({ doctorData }) => {
+  const currentDate = new Date();
+  const nextWeek = addDays(currentDate, 7);
+  
+  // Create an array to hold date options
+  const dateOptions = [];
+  let currentDateIterator = currentDate;
+  
+  // Generate date options for the next week
+  while (currentDateIterator < nextWeek) {
+    dateOptions.push({
+      value: format(currentDateIterator, 'yyyy-MM-dd'),
+      label: format(currentDateIterator, 'EEEE, MMM dd'),
+    });
+    currentDateIterator = addDays(currentDateIterator, 1);
+  }
+
+  console.log(dateOptions);
+
+
   const [selectedFile, setSelectedFile] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -60,7 +81,7 @@ const Profile = ({ doctorData }) => {
         method: "put",
         headers: {
           "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token()}`,
         },
 
         body: JSON.stringify(formData),
@@ -415,7 +436,7 @@ const Profile = ({ doctorData }) => {
                     value={item.day}
                     className="form__input py-3.5"
                   >
-                    <option value="">Select</option>
+                    {/* <option value="">Select</option>
                     <option value="saturday">Saturday</option>
                     <option value="sunday">Sunday</option>
                     <option value="monday">Monday</option>
@@ -423,7 +444,14 @@ const Profile = ({ doctorData }) => {
                     <option value="wednesday">Wednesday</option>
                     <option value="thursday">Thursday</option>
                     <option value="friday">Friday</option>
-                  </select>
+                  </select> */}
+                  <option value="">Select</option>
+                {dateOptions.map((dateOption) => (
+                  <option key={dateOption.value} value={dateOption.label}>
+                    {dateOption.label}
+                  </option>
+                ))}
+                </select>
                 </div>
                 <div>
                   <p className="form__label">Starting Time*</p>
