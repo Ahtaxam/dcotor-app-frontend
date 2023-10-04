@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../config";
 import HashLoader from "react-spinners/HashLoader";
@@ -7,6 +7,7 @@ import { ValidateEmail } from "../utils/validateEmail";
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+
   const handleInputChange = (e) => {
     setEmail(e.target.value);
   };
@@ -19,7 +20,7 @@ function ForgotPassword() {
     }
     setLoading(true);
     try {
-      const res = await fetch(`${BASE_URL}/resetpassword`, {
+      const res = await fetch(`${BASE_URL}/forgotpassword`, {
         method: "post",
         headers: {
           Accept: "application/json",
