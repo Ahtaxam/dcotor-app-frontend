@@ -15,6 +15,9 @@ import Blogs from "../pages/Blogs";
 import Blog from "../pages/writeBlog"
 import ShowBlog from "../pages/Blog"
 import ForgotPassword from "../pages/ForgotPassword";
+import ResetPassword from "../pages/ResetPassword";
+
+import OtherDoctors from "../pages/OtherDoctors"
 
 const Router = () => {
   return (
@@ -58,6 +61,9 @@ const Router = () => {
       <Route path="/:id" element={<ShowBlog/>} />
 
       <Route path="forgotpassword" element={<ForgotPassword/>} />
+      <Route path="resetpassword/:id/:token" element={<ResetPassword/>} />
+
+      <Route path="/otherdoctors" element={<OtherDoctors/>} />
     </Routes>
   );
 };
