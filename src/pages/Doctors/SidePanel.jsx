@@ -3,9 +3,16 @@
 import { toast } from "react-toastify";
 import convertTime from "../../utils/convertTime";
 import { BASE_URL, token } from "./../../config";
+import { useNavigate } from "react-router-dom";
 
 const SidePanel = ({ ticketPrice, timeSlots, doctorId, bookedTime }) => {
+  const navigate = useNavigate();
   const bookingHandler = async () => {
+    if (!token()) {
+      toast.error("Login Please");
+      navigate("/login");
+      return;
+    }
     if (bookedTime === undefined || Object.keys(bookedTime).length === 0) {
       toast.error("Select Time Slot");
       return;
@@ -51,7 +58,7 @@ const SidePanel = ({ ticketPrice, timeSlots, doctorId, bookedTime }) => {
       });
 
       const [doctorresponsee, striperesponse, emailresponse] =
-        await Promise.all([doctorPromise,stripePromise,emailPromise]);
+        await Promise.all([doctorPromise, stripePromise, emailPromise]);
 
       const doctorData = await doctorresponsee.json();
       const email = await emailresponse.json();
