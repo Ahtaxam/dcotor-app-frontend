@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../config";
-import  HashLoader  from "react-spinners/HashLoader.js";
+import HashLoader from "react-spinners/HashLoader.js";
+import useFetchData from "../hooks/useFetchData";
 
 function ShowBlog() {
   const param = useParams();
-  const [blog, setBlog] = useState([]);
+  const [blog, setBlog] = useState();
 
   const fetchBlogs = async () => {
     const res = await fetch(`${BASE_URL}/blogs/${param.id}`, {
@@ -15,35 +16,59 @@ function ShowBlog() {
       },
     });
     const data = await res.json();
-    setBlog([data]);
+    setBlog(data);
   };
 
   useEffect(() => {
     fetchBlogs();
   }, []);
 
+  console.log(blog);
+
   return (
     <div>
-      {blog.length > 0 ? (
-        blog.map((data) => (
-          <div className="bg-white rounded-lg overflow-hidden shadow-lg p-6 m-4">
-            <img
-              src={data.image}
-              alt="image..."
-              className="w-full h-64 object-cover"
-            />
-            <div className="p-6">
-              <h2 className="text-3xl font-semibold text-gray-800 mb-4">
-                {data.title}
-              </h2>
-              <p className="text-gray-600 text-lg mb-6">{data.summary}</p>
-              <p
-                className="text-gray-700 text-base leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: data.content }}
-              ></p>
-            </div>
+      {blog ? (
+        <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white  antialiased">
+          <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
+            <article class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+              <>
+                <header class="mb-4 lg:mb-6 not-format">
+                  <address class="flex items-center mb-6 not-italic">
+                    <div class="inline-flex items-center mr-3 text-sm text-gray-900 ">
+                      <img
+                        class="mr-4 w-16 h-16 rounded-full"
+                        src={blog?.doctorId?.photo}
+                        alt="Jese Leos"
+                      />
+                      <div>
+                        <a href="#" rel="author" class="text-xl font-bold">
+                          {blog?.doctorId?.name}
+                        </a>
+                        <p class="text-base text-gray-500 dark:text-gray-400">
+                          {blog?.doctorId?.specialization}
+                        </p>
+                      </div>
+                    </div>
+                  </address>
+                  <h1 class="mb-4 text-3xl font-extrabold leading-tight lg:mb-6 lg:text-4xl">
+                    {blog?.title}
+                  </h1>
+                </header>
+
+                <div>
+                  <p class="mb-4 text-xl  leading-tight  lg:mb-6 lg:text-xl ">
+                    {blog?.summary}
+                  </p>
+                </div>
+
+                <div>
+                  <img src={blog?.image} alt="Image" />
+                </div>
+                <div dangerouslySetInnerHTML={{ __html: blog?.content }}></div>
+              </>
+            </article>
           </div>
-        ))
+        </main>
       ) : (
         <div className="flex items-center justify-center w-full h-full">
           <HashLoader color="#0067FF" />

@@ -13,6 +13,7 @@ const Doctors = () => {
     loading,
     error,
   } = useFetchData(`${BASE_URL}/doctors?query=${debouncedQuery}`);
+  console.log(doctors);
 
   const handleSearch = () => {
     setQuery(query.trim());
@@ -74,6 +75,10 @@ const Doctors = () => {
               ))}
             </div>
           )}
+
+          {!loading && doctors.length === 0 && 
+          <h1 className="text-center text-red-700	">Doctor not available currently</h1>
+          }
         </div>
       </section>
 

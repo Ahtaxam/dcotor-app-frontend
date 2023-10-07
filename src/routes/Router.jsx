@@ -58,7 +58,7 @@ const Router = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/checkout-success" element={<CheckoutSuccess />} />
       <Route path="/blogs" element={<Blogs />} />
-      <Route path="/:id" element={<ShowBlog/>} />
+      <Route path="/blogs/:id" element={<ShowBlog/>} />
 
       <Route path="forgotpassword" element={<ForgotPassword/>} />
       <Route path="resetpassword/:id/:token" element={<ResetPassword/>} />

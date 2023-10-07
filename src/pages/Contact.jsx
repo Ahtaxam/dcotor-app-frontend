@@ -1,10 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { BASE_URL, token } from "../config";
 import { AuthContext } from "../context/AuthContext";
 
 const Contact = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { user } = useContext(AuthContext);
   const [userData, setuserData] = useState({
     email: "",
