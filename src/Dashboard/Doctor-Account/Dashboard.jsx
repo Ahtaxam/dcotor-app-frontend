@@ -104,7 +104,7 @@ const Dashboard = () => {
                 )}
                 {tab === "settings" && <Profile doctorData={doctorData} />}
                 {tab === "appointments" && (
-                  <Appointments appointments={doctorData?.appointments} />
+                  <Appointments appointments={doctorData?.appointments} loading={loading}/>
                 )}
               </div>
             </div>

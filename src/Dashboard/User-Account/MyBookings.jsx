@@ -11,7 +11,6 @@ const MyBookings = () => {
     error,
   } = useFetchData(`${BASE_URL}/users/appointments/my-appointments`);
 
-
   return (
     <div>
       {loading && (
@@ -30,10 +29,18 @@ const MyBookings = () => {
 
       {!loading && !error && (
         <div className="grid grid-cols-1  lg:grid-cols-2 gap-5">
-          {myAppointments?.map(doctor => (
-            <DoctorCard doctor={doctor.doctor} key={doctor.id} booked={true} bookingTime={doctor.bookingTime}/>
+          {myAppointments?.map((doctor) => (
+            <DoctorCard
+              doctor={doctor.doctor}
+              key={doctor.id}
+              booked={true}
+              bookingTime={doctor.bookingTime}
+            />
           ))}
         </div>
+      )}
+      {!loading && myAppointments.length === 0 && (
+        <p className="text-center mt-4 text-red-500">No Appointment Booked</p>
       )}
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
 import uploadImageToCloudinary from "../utils/uploadCloudinary";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -15,7 +16,7 @@ function Blog() {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("undefined");
   const [summary, setSummary] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -50,12 +51,11 @@ function Blog() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          doctorId:user?._id,
+          doctorId: user?._id,
           title,
           summary,
           content,
-          image:selectedFile
-
+          image: selectedFile,
         }),
       });
 
@@ -77,14 +77,14 @@ function Blog() {
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
+      ["bold", "italic", "underline", "strike", "blockquote", "image"],
       [
         { list: "ordered" },
         { list: "bullet" },
         { indent: "-1" },
         { indent: "+1" },
       ],
-      ["link"],
+      ["link", "image"],
       ["clean"],
     ],
   };
@@ -100,6 +100,7 @@ function Blog() {
     "bullet",
     "indent",
     "link",
+    "image",
   ];
   return (
     <div className="bg-white shadow-lg rounded-lg p-6">

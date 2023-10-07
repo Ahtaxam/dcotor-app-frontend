@@ -15,16 +15,12 @@ function OtherDoctors() {
 
   return (
     <div className="p-6">
-      {otherDoctors.length > 0 ? (
+      {!loading ? (
         otherDoctors.map((data) => (
           <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <>
               <div className="flex justify-center items-center">
-                <img
-                  className="rounded-t-lg"
-                  src={data.photo}
-                  alt="Image"
-                />
+                <img className="rounded-t-lg" src={data.photo} alt="Image" />
               </div>
               <div class="p-5">
                 <div>
@@ -46,6 +42,12 @@ function OtherDoctors() {
       ) : (
         <div className="flex items-center justify-center w-full h-full">
           <HashLoader color="#0067FF" />
+        </div>
+      )}
+
+      {!loading && otherDoctors.length === 0 && (
+        <div className="flex items-center justify-center w-full h-full">
+          <p>No Doctor Available Currently !</p>
         </div>
       )}
     </div>
