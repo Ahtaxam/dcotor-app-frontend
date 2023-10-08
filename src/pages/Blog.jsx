@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { BASE_URL } from "../config";
+import { useNavigate, useParams } from "react-router-dom";
+import { BASE_URL, token } from "../config";
 import HashLoader from "react-spinners/HashLoader.js";
-import useFetchData from "../hooks/useFetchData";
+import { toast } from "react-toastify";
 
 function ShowBlog() {
   const param = useParams();
+  const navigate = useNavigate();
   const [blog, setBlog] = useState();
 
   const fetchBlogs = async () => {
@@ -23,7 +24,26 @@ function ShowBlog() {
     fetchBlogs();
   }, []);
 
-  console.log(blog);
+  const handleDelete = async () => {
+    const res = confirm("Are you sure ! You want to delete this");
+    if (!res) {
+      return;
+    }
+    try {
+      const res = await fetch(`${BASE_URL}/blogs/${param.id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token()}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      toast.success("deleted Successfully!");
+      navigate("/blogs");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div>
@@ -64,7 +84,18 @@ function ShowBlog() {
                 <div>
                   <img src={blog?.image} alt="Image" />
                 </div>
-                <div dangerouslySetInnerHTML={{ __html: blog?.content }}></div>
+                <div
+                  className="mt-4"
+                  dangerouslySetInnerHTML={{ __html: blog?.content }}
+                ></div>
+                <div className="mt-4 relative">
+                  <button
+                    onClick={handleDelete}
+                    className="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
               </>
             </article>
           </div>

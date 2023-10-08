@@ -35,11 +35,11 @@ function Blogs() {
 
   return (
     <div className="min-h-screen flex flex-col justify-between m-4">
-      <div className="flex justify-center gap-8 ">
+      <div className="flex flex-wrap justify-center gap-8 ">
         {!loading ? (
           blogs.map((data, index) => (
             <Link to={`/blogs/${data._id}`}>
-              <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow w-[400px] h-[400px] ">
+              <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow  w-[400px] h-[500px] ">
                 <a href="#">
                   <img
                     class="rounded-t-lg h-[200px] w-[100%]"
@@ -50,11 +50,11 @@ function Blogs() {
                 <div class="p-5">
                   <a href="#">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight  ">
-                      {data.title}
+                      {data.title.slice(0,80)}
                     </h5>
                   </a>
                   <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    {data.summary}
+                    {data.summary.slice(0,150) + " ... "}
                   </p>
                 </div>
               </div>
