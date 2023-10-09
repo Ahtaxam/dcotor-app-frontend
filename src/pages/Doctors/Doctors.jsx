@@ -13,7 +13,6 @@ const Doctors = () => {
     loading,
     error,
   } = useFetchData(`${BASE_URL}/doctors?query=${debouncedQuery}`);
-  console.log(doctors);
 
   const handleSearch = () => {
     setQuery(query.trim());

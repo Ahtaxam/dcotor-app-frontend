@@ -22,7 +22,7 @@ export const faqs = [
   {
     question: "Do you offer telemedicine appointments?",
     content:
-      "Yes, we provide telemedicine appointments for your convenience. You can consult with a doctor online from the comfort of your home. Just select the telemedicine option where you booked you appointment.",
+    "Currently, We are not offering this seervice. but in future we are planing to..... Stay tuned for further Updates"
   },
 ];
 

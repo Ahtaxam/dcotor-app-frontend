@@ -1,11 +1,16 @@
 /* eslint-disable react/prop-types */
+import { useContext } from "react";
 import FeedbackForm from "./FeedbackForm";
 import avatar from "../../assets/images/avatar-icon.png";
 import { useState } from "react";
 import { formatDate } from "../../utils/formatDate";
 import { AiFillStar } from "react-icons/ai";
+import { AuthContext } from "../../context/AuthContext";
 
 const Feedback = ({ reviews, totalRating }) => {
+  const { user, role, token } = useContext(AuthContext);
+
+  console.log(user, role);
   const [showForm, setShowForm] = useState(false);
 
   return (
@@ -43,7 +48,7 @@ const Feedback = ({ reviews, totalRating }) => {
         ))}
       </div>
 
-      {!showForm && (
+      {user && role === "patient" && !showForm && (
         <div className="text-center">
           <button className="btn" onClick={() => setShowForm(true)}>
             Give Feedback

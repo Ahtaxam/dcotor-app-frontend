@@ -18,9 +18,14 @@ import Testimonial from "../components/Testimonial/Testimonial";
 import FaqList from "../components/Faq/FaqList";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import io from "socket.io-client";
+
+// const socket = io.connect("http://localhost:8000");
 
 const Home = () => {
-  const {role} = useContext(AuthContext);
+  const { role } = useContext(AuthContext);
+  // console.log(socket);
+
   return (
     <>
       <section className="hero__section pt-[60px] 2xl:h-[800px]">
@@ -86,106 +91,110 @@ const Home = () => {
         </div>
       </section>
 
-      {role !== "doctor" && <section>
-        <div className="container ">
-          <div className="lg:w-[470px] mx-auto">
-            <h2 className="heading text-center">
-              Providing the best medical services
-            </h2>
-            <p className="text__para text-center">
-              World-class care for everyone. Our health System offers unmatched,
-              expert health care.
-            </p>
+      {role !== "doctor" && (
+        <section>
+          <div className="container ">
+            <div className="lg:w-[470px] mx-auto">
+              <h2 className="heading text-center">
+                Providing the best medical services
+              </h2>
+              <p className="text__para text-center">
+                World-class care for everyone. Our health System offers
+                unmatched, expert health care.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-[30px] mt-[30px] lg:mt-[55px]">
+              <div className="py-[30px] px-5 ">
+                <div className="flex items-center justify-center">
+                  <img src={icon01} alt="" />
+                </div>
+
+                <div className="mt-[30px]">
+                  <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
+                    Find a Doctor
+                  </h2>
+                  <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
+                    Discover a wide network of experienced healthcare
+                    professionals, ensuring you can find the perfect doctor to
+                    address your specific needs.
+                  </p>
+
+                  <Link
+                    to="/doctors"
+                    className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-buttonBgColor hover:border-none"
+                  >
+                    <BsArrowRight className="group-hover:text-white w-6 h-5" />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="py-[30px] px-5 ">
+                <div className="flex items-center justify-center">
+                  <img src={icon02} alt="" />
+                </div>
+
+                <div className="mt-[30px]">
+                  <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
+                    Find a Location
+                  </h2>
+                  <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
+                    Locate healthcare facilities near you with ease, making it
+                    convenient to access medical services wherever you are.
+                  </p>
+
+                  <Link
+                    to="/doctors"
+                    className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-buttonBgColor hover:border-none"
+                  >
+                    <BsArrowRight className="group-hover:text-white w-6 h-5" />
+                  </Link>
+                </div>
+              </div>
+              <div className="py-[30px] px-5 ">
+                <div className="flex items-center justify-center">
+                  <img src={icon03} alt="" />
+                </div>
+
+                <div className="mt-[30px]">
+                  <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
+                    Book Appointment
+                  </h2>
+                  <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
+                    Effortlessly schedule appointments at your preferred time,
+                    so you can prioritize your health without the hassle.
+                  </p>
+
+                  <Link
+                    to="/doctors"
+                    className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-buttonBgColor hover:border-none"
+                  >
+                    <BsArrowRight className="group-hover:text-white w-6 h-5" />
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-[30px] mt-[30px] lg:mt-[55px]">
-            <div className="py-[30px] px-5 ">
-              <div className="flex items-center justify-center">
-                <img src={icon01} alt="" />
-              </div>
-
-              <div className="mt-[30px]">
-                <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
-                  Find a Doctor
-                </h2>
-                <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                  Discover a wide network of experienced healthcare
-                  professionals, ensuring you can find the perfect doctor to
-                  address your specific needs.
-                </p>
-
-                <Link
-                  to="/doctors"
-                  className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-buttonBgColor hover:border-none"
-                >
-                  <BsArrowRight className="group-hover:text-white w-6 h-5" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="py-[30px] px-5 ">
-              <div className="flex items-center justify-center">
-                <img src={icon02} alt="" />
-              </div>
-
-              <div className="mt-[30px]">
-                <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
-                  Find a Location
-                </h2>
-                <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                  Locate healthcare facilities near you with ease, making it
-                  convenient to access medical services wherever you are.
-                </p>
-
-                <Link
-                  to="/doctors"
-                  className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-buttonBgColor hover:border-none"
-                >
-                  <BsArrowRight className="group-hover:text-white w-6 h-5" />
-                </Link>
-              </div>
-            </div>
-            <div className="py-[30px] px-5 ">
-              <div className="flex items-center justify-center">
-                <img src={icon03} alt="" />
-              </div>
-
-              <div className="mt-[30px]">
-                <h2 className="text-[26px] leading-9 text-headingColor font-[700] text-center">
-                  Book Appointment
-                </h2>
-                <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center">
-                  Effortlessly schedule appointments at your preferred time, so
-                  you can prioritize your health without the hassle.
-                </p>
-
-                <Link
-                  to="/doctors"
-                  className="w-[44px] h-[44px] rounded-full border border-solid border-[#181A1E] mt-[30px] mx-auto flex items-center justify-center group hover:bg-buttonBgColor hover:border-none"
-                >
-                  <BsArrowRight className="group-hover:text-white w-6 h-5" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>}
+        </section>
+      )}
 
       <About />
 
-      {role !== "doctor" &&<section>
-        <div className="container">
-          <div className="xl:w-[470px] mx-auto">
-            <h2 className="heading text-center">Our medical services</h2>
-            <p className="text__para text-center">
-              World-class care for everyone. Our health System offers unmatched,
-              expert health care.
-            </p>
-          </div>
+      {role !== "doctor" && (
+        <section>
+          <div className="container">
+            <div className="xl:w-[470px] mx-auto">
+              <h2 className="heading text-center">Our medical services</h2>
+              <p className="text__para text-center">
+                World-class care for everyone. Our health System offers
+                unmatched, expert health care.
+              </p>
+            </div>
 
-          <ServicesList />
-        </div>
-      </section>}
+            <ServicesList />
+          </div>
+        </section>
+      )}
 
       <section>
         <div className="container">
@@ -247,20 +256,6 @@ const Home = () => {
         </div>
       </section>
 
-     { role !== "doctor" && <section>
-        <div className="container">
-          <div className="xl:w-[470px] mx-auto">
-            <h2 className="heading text-center">Our great doctors</h2>
-            <p className="text__para text-center">
-              World-class care for everyone. Our health System offers unmatched,
-              expert health care.
-            </p>
-          </div>
-
-          <DoctorsList /> 
-        </div>
-      </section>
-}
       <section>
         <div className="container">
           <div className="flex justify-between gap-[50px] lg:gap-0">
