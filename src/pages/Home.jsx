@@ -6,11 +6,11 @@ import icon01 from "../assets/images/icon01.png";
 import icon02 from "../assets/images/icon02.png";
 import icon03 from "../assets/images/icon03.png";
 import About from "../components/About/About.jsx";
-import faqImg from "../assets/images/faq-img.png";
+import faqImg from "../assets/images/Ali.jpeg";
 import { BsArrowRight } from "react-icons/bs";
 
 import ServicesList from "../components/Services/ServicesList";
-import featureImg from "../assets/images/feature-img.png";
+import featureImg from "../assets/images/local1.png";
 import videoIcon from "../assets/images/video-icon.png";
 import avatarIcon from "../assets/images/avatar-icon.png";
 import DoctorsList from "../components/Doctors/DoctorsList";
@@ -225,32 +225,6 @@ const Home = () => {
             <div className="relative z-10  xl:w-[770px] flex justify-end mt-[50px] lg:mt-0">
               <img src={featureImg} className="w-3/4" alt="about_img" />
 
-              <div className="w-[150px] lg:w-[248px] bg-white absolute bottom-[50px] left-0  md:bottom-[100px]  md:left-[20px] z-20 p-2 pb-3 lg:pt-4 lg:px-4 lg:pb-[26px] rounded-[10px]">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-[6px] lg:gap-3">
-                    <p className="text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 font-[600] text-headingColor">
-                      Tue, 24
-                    </p>
-                    <p className="text-[10px] leading-[10px] lg:text-[14px] lg:leading-5 font-[400] text-textColor">
-                      10:00AM
-                    </p>
-                  </div>
-                  <span className="w-5 h-5 lg:w-[34px] lg:h-[34px] flex items-center justify-center bg-yellowColor rounded-[4px] py-1 px-[6px] lg:py-3 lg:px-[9px]">
-                    <img src={videoIcon} alt="" />
-                  </span>
-                </div>
-
-                <div className="w-[65px] lg:w-[96px] bg-[#CCF0F3] py-1 px-2 lg:py-[6px] lg:px-[10px] rounded-full  text-[8px] leading-[8px] lg:text-[12px] lg:leading-4 font-[500] text-irisBlueColor mt-2 lg:mt-4 ">
-                  Consultation
-                </div>
-
-                <div className="flex items-center gap-[6px] lg:gap-[10px] mt-2 lg:mt-[18px]">
-                  <img src={avatarIcon} alt="" />
-                  <h4 className="text-[10px] leading-3 lg:text-[16px] lg:leading-[22px] font-[700] text-headingColor">
-                    Wayne Collins
-                  </h4>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -260,7 +234,7 @@ const Home = () => {
         <div className="container">
           <div className="flex justify-between gap-[50px] lg:gap-0">
             <div className="w-1/2 hidden md:block">
-              <img src={faqImg} alt="" />
+              <img src={faqImg} alt="" className="w-[600px] h-[600px]"/>
             </div>
 
             <div className="w-full md:w-1/2">
