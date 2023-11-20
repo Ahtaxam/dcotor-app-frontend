@@ -19,6 +19,7 @@ const SignUp = () => {
     role: "patient",
     photo: selectedFile,
   });
+  const [error, setError] = useState({ name: "" });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -38,8 +39,6 @@ const SignUp = () => {
     setFormData({ ...formData, photo: data.url });
   };
 
-  
-
   const validatePassword = (password) => {
     if (password.length < 8 || password.length > 12) {
       toast.error("Password length should between 8 to 12 character !");
@@ -47,6 +46,15 @@ const SignUp = () => {
     }
 
     return true;
+  };
+
+  const handleName = () => {
+    var regExp = /[a-zA-Z]/g;
+    if (!regExp.test(formData.name) || /\d/.test(formData.name)) {
+      setError({ ...error, name: "Enter Valid name" });
+      return;
+    }
+    setError({name:""})
   };
 
   const handleShowPassword = () => {
@@ -88,7 +96,6 @@ const SignUp = () => {
       setLoading(false);
     }
   };
-
   return (
     <section className="px-5 xl:px-0">
       <div className="max-w-[1170px] mx-auto ">
@@ -111,12 +118,14 @@ const SignUp = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
+                  onBlur={handleName}
                   placeholder="Full Name"
-                  className="w-full pr-4 py-3 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-[#0067FF] text-[16px] leading-7 text-headingColor placeholder:text-textColor"
+                  className={`w-full pr-4 py-3 border-b border-solid ${error.name ? " border-red-900":"border-[#0066ff61]"} focus:outline-none focus:border-b-[#0067FF] text-[16px] leading-7 text-headingColor placeholder:text-textColor`}
                   required
                   autoFocus
                 />
               </div>
+              <p className="text-red-400 text-center mb-2">{error.name}</p>
               <div className="mb-5">
                 <input
                   type="email"
