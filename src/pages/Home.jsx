@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import heroImg01 from "../assets/images/local1.png";
 import heroImg02 from "../assets/images/local2.avif";
 import heroImg03 from "../assets/images/local3.jpeg";
@@ -16,15 +16,47 @@ import avatarIcon from "../assets/images/avatar-icon.png";
 import DoctorsList from "../components/Doctors/DoctorsList";
 import Testimonial from "../components/Testimonial/Testimonial";
 import FaqList from "../components/Faq/FaqList";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import io from "socket.io-client";
-
-// const socket = io.connect("http://localhost:8000");
+import { BASE_URL } from "../config.js";
+import { toast } from "react-toastify";
 
 const Home = () => {
-  const { role } = useContext(AuthContext);
-  // console.log(socket);
+  const { user, role } = useContext(AuthContext);
+  const [reviewMessage, setReviewMessage] = useState();
+  const navigate = useNavigate();
+
+  const handleReviewMessage = (e) => {
+    setReviewMessage(e.target.value);
+  };
+
+  const handlePublishReview = async () => {
+    if (reviewMessage.length < 1) {
+      return toast.error("message can't be empty");
+    }
+    try {
+      const res = await fetch(`${BASE_URL}/appreviews`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: user.name,
+          message: reviewMessage,
+        }),
+      });
+      const { success, message } = await res.json();
+      console.log(message);
+
+      if (success === true) {
+        toast.success(message);
+      }
+      setReviewMessage("");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   return (
     <>
@@ -43,7 +75,12 @@ const Home = () => {
                   By streamlining the appointment booking process, we ensure
                   that patients can access timely medical care and guidance.
                 </p>
-                <button className="btn">Request an Appointment </button>
+
+                {role !== "doctor" && (
+                  <button onClick={() => navigate("/doctors")} className="btn">
+                    Request an Appointment{" "}
+                  </button>
+                )}
               </div>
 
               <div className="mt-[30px] lg:mt-[70px] flex flex-col md:flex-row lg:items-center gap-5 lg:gap-[30px]">
@@ -224,7 +261,6 @@ const Home = () => {
             {/* ========= feature img ======== */}
             <div className="relative z-10  xl:w-[770px] flex justify-end mt-[50px] lg:mt-0">
               <img src={featureImg} className="w-3/4" alt="about_img" />
-
             </div>
           </div>
         </div>
@@ -234,7 +270,7 @@ const Home = () => {
         <div className="container">
           <div className="flex justify-between gap-[50px] lg:gap-0">
             <div className="w-1/2 hidden md:block">
-              <img src={faqImg} alt="" className="w-[600px] h-[600px]"/>
+              <img src={faqImg} alt="" className="w-[600px] h-[600px]" />
             </div>
 
             <div className="w-full md:w-1/2">
@@ -259,6 +295,24 @@ const Home = () => {
           </div>
 
           <Testimonial />
+          {role && (
+            <div>
+              <textarea
+                placeholder="leave a review"
+                className="resize-none border border-gray-300 rounded-md p-3 w-[40%] focus:outline-none focus:ring focus:border-blue-00"
+                rows={4}
+                value={reviewMessage}
+                onChange={handleReviewMessage}
+              />
+              <br />
+              <button
+                onClick={handlePublishReview}
+                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+              >
+                Publish
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </>
